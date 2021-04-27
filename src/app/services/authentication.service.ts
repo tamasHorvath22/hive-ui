@@ -37,7 +37,7 @@ export class AuthenticationService {
     return false;
   }
 
-  async getJwtToken(): Promise<void> {
+  public async getJwtToken(): Promise<void> {
     this.authService.user$.subscribe(async (data) => {
       this.userAuthData = data;
       if (!this.userAuthData) {
