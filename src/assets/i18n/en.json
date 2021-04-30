@@ -1,0 +1,8 @@
+{
+  "profile": {
+    "works": "Profile page works!"
+  },
+  "main": {
+    "toggleLanguage": "Toggle language"
+  }
+}
