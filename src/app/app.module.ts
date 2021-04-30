@@ -5,7 +5,13 @@ import { AppComponent } from './app.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './services/authentication.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -14,6 +20,13 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    }),
     AppRoutingModule,
     AuthModule.forRoot({
       domain: environment.authDomain,
