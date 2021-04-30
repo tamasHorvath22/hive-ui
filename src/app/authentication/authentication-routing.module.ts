@@ -1,3 +1,4 @@
+import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'logging-in',
     component: LoggingInComponent
+  },
+  {
+    path: 'logged-out',
+    component: LogoutPageComponent
   }
 ];
 

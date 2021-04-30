@@ -1,8 +1,9 @@
 {
-  "profile": {
-    "works": "Profil oldal fasza!"
-  },
-  "main": {
-    "toggleLanguage": "Válts nyelvet"
+  "test": {
+    "works": "Profil oldal fasza!",
+    "toggleLanguage": "Válts nyelvet",
+    "welcome": "Üdv",
+    "login": "Bejelentkezés",
+    "logout": "Kijelentkezés"
   }
 }

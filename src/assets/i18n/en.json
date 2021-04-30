@@ -1,8 +1,9 @@
 {
-  "profile": {
-    "works": "Profile page works!"
-  },
-  "main": {
-    "toggleLanguage": "Toggle language"
+  "test": {
+    "works": "Profile page works!",
+    "toggleLanguage": "Toggle language",
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout"
   }
 }

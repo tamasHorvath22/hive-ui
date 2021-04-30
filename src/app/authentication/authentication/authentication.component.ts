@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { LOCALE_ID, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-authentication',
@@ -9,7 +8,7 @@ import { LOCALE_ID, Inject } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, @Inject(LOCALE_ID) public locale: string) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
     console.log(window.navigator);
@@ -19,7 +18,4 @@ export class AuthenticationComponent implements OnInit {
     this.authenticationService.onLogin();
   }
 
-  onLogout(): void {
-    this.authenticationService.logoutAndClearLocalStorage();
-  }
 }

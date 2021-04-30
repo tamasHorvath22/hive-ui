@@ -1,3 +1,4 @@
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserJwtModel } from 'src/app/model/user-jwt.model';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
@@ -11,6 +12,7 @@ export class AuthguardService implements CanActivate {
 
   constructor(
     private router: Router,
+    private authenticationService: AuthenticationService
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -20,6 +22,8 @@ export class AuthguardService implements CanActivate {
     }
     const decodedToken: UserJwtModel = jwt_decode(token);
     if (decodedToken.firstname) {
+      // refreshes or passes user data to observable
+      this.authenticationService.userJwtData.next(decodedToken);
       return true;
     } else {
       return this.router.parseUrl('/auth');

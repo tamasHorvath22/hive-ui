@@ -1,5 +1,6 @@
 import { LanguageService } from './services/language.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'hive-ui';
 
-  constructor(private languageService: LanguageService) {}
+  constructor(
+    private languageService: LanguageService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.languageService.setDefaultLanguage();
@@ -17,6 +21,10 @@ export class AppComponent implements OnInit {
 
   onToggle() {
     this.languageService.toggleLanguage();
+  }
+
+  onLogout(): void {
+    this.authenticationService.logoutAndClearLocalStorage();
   }
 
 }
