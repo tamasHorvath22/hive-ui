@@ -1,5 +1,10 @@
-<p>{{ 'test.works' | translate }}</p>
-<div>{{ 'test.welcome' | translate }} {{ userJwtData?.firstname }}</div>
+<div>{{ 'profile.welcome' | translate }} {{ userJwtData?.firstname }}</div>
+
+<div>{{ 'profile.yourApiary' | translate }}</div>
+
+<div *ngFor="let apiary of apiaries">
+  {{ apiary.name }}
+</div>
 
 <input type="text" [formControl]="apiaryName">
 <div>

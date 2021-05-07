@@ -1,3 +1,5 @@
+import { ApiariesModel } from './../../model/apiaries';
+import { UserDataService } from './../../services/user-data.service';
 import { Component, OnInit } from '@angular/core';
 import { UserJwtModel } from 'src/app/model/user-jwt.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -12,15 +14,34 @@ export class ProfileComponent implements OnInit {
 
   public apiaryName = new FormControl(null);
   public userJwtData: UserJwtModel | undefined;
+  public apiaries?: ApiariesModel[];
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private userDataServce: UserDataService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.subscribeForUserData();
+    this.subscribeForApiaryData();
+    await this.getApiaryData();
   }
 
-  public onAddApiary(): void {
-    console.log(this.apiaryName.value)
+  public async onAddApiary(): Promise<void> {
+    const data = { name: this.apiaryName.value };
+    await this.userDataServce.createApiary(data);
+  }
+
+  private async getApiaryData(): Promise<void> {
+    await this.userDataServce.getApiaryData();
+  }
+
+  private subscribeForApiaryData(): void {
+    this.userDataServce.apiaries.subscribe((apiaries: ApiariesModel[]) => {
+      if (apiaries) {
+        this.apiaries = apiaries;
+      }
+    })
   }
 
   private subscribeForUserData(): void {

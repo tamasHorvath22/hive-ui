@@ -5,5 +5,10 @@
     "welcome": "Welcome",
     "login": "Login",
     "logout": "Logout"
+  },
+  "profile": {
+    "welcome": "Welcome",
+    "addApiary": "Add apiary",
+    "yourApiary": "Your apiaries"
   }
 }

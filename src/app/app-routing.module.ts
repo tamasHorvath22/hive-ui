@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),
+    canActivate: [AuthguardService]
   },
   {
     path: 'user',

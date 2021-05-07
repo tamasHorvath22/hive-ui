@@ -26,10 +26,12 @@ export class AuthguardService implements CanActivate {
     if (decodedToken.firstname) {
       // refreshes or passes user data to observable
       this.authenticationService.userJwtData.next(decodedToken);
-      // if (state.url === '/auth/login') {
-      //   return this.router.parseUrl('/user/profile');
-      // }
-      return true;
+      // if user tries to open /auth while logged in, redirected to profile page
+      if (state.url === '/auth') {
+        return this.router.parseUrl('/user/profile');
+      } else {
+        return true;
+      }
     } else {
       return this.router.parseUrl('/auth');
     }

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatButtonModule } from '@angular/material/button';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       domain: environment.authDomain,
       clientId: environment.authClientdId,
       redirectUri: `${environment.uiBaseUrl}/auth/logging-in`
-    })
+    }),
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
