@@ -5,5 +5,8 @@
     "welcome": "Üdv",
     "login": "Bejelentkezés",
     "logout": "Kijelentkezés"
+  },
+  "profile": {
+    "addApiary": "Méhészet hozzáadása"
   }
 }

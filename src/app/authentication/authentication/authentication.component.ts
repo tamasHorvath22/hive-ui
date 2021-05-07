@@ -10,9 +10,7 @@ export class AuthenticationComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {
-    console.log(window.navigator);
-  }
+  ngOnInit(): void {}
 
   onLogin(): void {
     this.authenticationService.onLogin();

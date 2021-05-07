@@ -16,6 +16,8 @@ export class AuthguardService implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log(next);
+    console.log(state);
     const token = localStorage.getItem(LocalstorageElement.HIVE_USER_TOKEN);
     if (!token) {
       return this.router.parseUrl('/auth');
@@ -24,6 +26,9 @@ export class AuthguardService implements CanActivate {
     if (decodedToken.firstname) {
       // refreshes or passes user data to observable
       this.authenticationService.userJwtData.next(decodedToken);
+      // if (state.url === '/auth/login') {
+      //   return this.router.parseUrl('/user/profile');
+      // }
       return true;
     } else {
       return this.router.parseUrl('/auth');
