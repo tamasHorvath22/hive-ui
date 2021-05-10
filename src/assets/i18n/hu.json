@@ -10,5 +10,12 @@
     "welcome": "Üdv",
     "addApiary": "Méhészet hozzáadása",
     "yourApiary": "Méhészeteid"
+  },
+  "apiary": {
+    "addSite": "Telephely hozzáadása"
+  },
+  "errorDialog": {
+    "databaseError": "Adatbázis hiba. Próbáld újra!",
+    "close": "Bezár"
   }
 }

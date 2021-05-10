@@ -8,6 +8,9 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DatabaseErrorDialogComponent } from './database-error-dialog/database-error-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -15,7 +18,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatabaseErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       clientId: environment.authClientdId,
       redirectUri: `${environment.uiBaseUrl}/auth/logging-in`
     }),
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }

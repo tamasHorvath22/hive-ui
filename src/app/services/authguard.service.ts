@@ -16,11 +16,13 @@ export class AuthguardService implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(next);
-    console.log(state);
     const token = localStorage.getItem(LocalstorageElement.HIVE_USER_TOKEN);
+    if (!token && state.url === '/auth') {
+      return true;
+    }
     if (!token) {
-      return this.router.parseUrl('/auth');
+      // TODO define logic
+      return true;
     }
     const decodedToken: UserJwtModel = jwt_decode(token);
     if (decodedToken.firstname) {

@@ -1,9 +1,11 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiariesModel } from './../../model/apiaries';
 import { UserDataService } from './../../services/user-data.service';
 import { Component, OnInit } from '@angular/core';
 import { UserJwtModel } from 'src/app/model/user-jwt.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormControl } from '@angular/forms';
+import { LocalstorageElement } from 'src/app/enums/localstorage-elements';
 
 @Component({
   selector: 'app-profile',
@@ -18,26 +20,39 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private userDataServce: UserDataService
+    private userDataService: UserDataService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit(): Promise<void> {
+    await this.getApiariesData();
     this.subscribeForUserData();
     this.subscribeForApiaryData();
-    await this.getApiaryData();
   }
 
   public async onAddApiary(): Promise<void> {
+    if (!this.apiaryName.value) {
+      return;
+    }
     const data = { name: this.apiaryName.value };
-    await this.userDataServce.createApiary(data);
+    await this.userDataService.createApiary(data);
   }
 
-  private async getApiaryData(): Promise<void> {
-    await this.userDataServce.getApiaryData();
+  public onSelectApiary(id: string): void {
+    this.router.navigate(['../apiary', id], { relativeTo: this.route });
+  }
+
+  private async getApiariesData(): Promise<void> {
+    const token = localStorage.getItem(LocalstorageElement.HIVE_USER_TOKEN);
+    if (!token) {
+      return;
+    }
+    await this.userDataService.getApiariesData();
   }
 
   private subscribeForApiaryData(): void {
-    this.userDataServce.apiaries.subscribe((apiaries: ApiariesModel[]) => {
+    this.userDataService.apiaries.subscribe((apiaries: ApiariesModel[]) => {
       if (apiaries) {
         this.apiaries = apiaries;
       }

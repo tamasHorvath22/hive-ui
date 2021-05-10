@@ -1,3 +1,4 @@
+import { ApiaryComponent } from './apiary/apiary.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
@@ -6,6 +7,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'apiary/:id',
+    component: ApiaryComponent
   }
 ];
 

@@ -1,0 +1,21 @@
+<div>{{ apiary?.name }}</div>
+
+<div *ngFor="let site of apiary?.sites">
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="onSelectSite(site)">
+    {{ site }}
+  </button>
+</div>
+
+
+<input type="text" [formControl]="siteName">
+<div>
+  <button
+    mat-raised-button
+    (click)="onAddSite()"
+    color="primary">
+    {{ 'apiary.addSite' | translate }}
+  </button>
+</div>

@@ -10,5 +10,12 @@
     "welcome": "Welcome",
     "addApiary": "Add apiary",
     "yourApiary": "Your apiaries"
+  },
+  "apiary": {
+    "addSite": "Add site"
+  },
+  "errorDialog": {
+    "databaseError": "Database error! Please try again!",
+    "close": "Close"
   }
 }

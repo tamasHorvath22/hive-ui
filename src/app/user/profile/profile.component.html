@@ -3,7 +3,12 @@
 <div>{{ 'profile.yourApiary' | translate }}</div>
 
 <div *ngFor="let apiary of apiaries">
-  {{ apiary.name }}
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onSelectApiary(apiary.id)">
+    {{ apiary.name }}
+  </button>
 </div>
 
 <input type="text" [formControl]="apiaryName">

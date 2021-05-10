@@ -6,10 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ApiaryComponent } from './apiary/apiary.component';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    ApiaryComponent
   ],
   imports: [
     CommonModule,
