@@ -7,6 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiariesModel } from '../model/apiaries';
 import { ApiaryModel } from '../model/apiary';
 
+export interface ServerError {
+  error: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -15,45 +18,71 @@ export class UserDataService {
   public apiary = new BehaviorSubject<ApiaryModel>({} as ApiaryModel);
   public apiaries = new BehaviorSubject<ApiariesModel[]>([]);
   public isDatabaseError = new BehaviorSubject<boolean>(false);
+  public isLoading = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {}
 
   public async addSite(data: { apiaryId: string, siteName: string }): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/add-site`;
-    const result = await this.httpClient.post<ApiariesModel[] | ResponseMessages.DATABASE_ERROR>(
-      url,
-      data,
-      { headers: this.getHeaders() }
-    ).toPromise();
-    this.handleApiaryResponse(result);
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.post<ApiaryModel | ServerError>(
+        url,
+        data,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      this.handleApiaryResponse(result);
+      this.isLoading.next(false);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
   }
 
   public async createApiary(data: { name: string}): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/create-apiary`;
-    const result = await this.httpClient.post<ApiariesModel[] | ResponseMessages.DATABASE_ERROR>(
-      url,
-      data,
-      { headers: this.getHeaders() }
-    ).toPromise();
-    this.handleApiariesResponse(result);
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.post<ApiariesModel[] | ServerError>(
+        url,
+        data,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      this.handleApiariesResponse(result);
+      this.isLoading.next(false);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
   }
 
   public async getApiariesData(): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/apiary-data`;
-    const result = await this.httpClient.get(
-      url,
-      { headers: this.getHeaders() }
-    ).toPromise();
-    this.handleApiariesResponse(result);
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.get<ApiariesModel[] | ServerError>(
+        url,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      this.handleApiariesResponse(result);
+      this.isLoading.next(false);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
   }
 
   public async getApiaryData(apiaryId: string): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/apiary-data/${apiaryId}`;
-    const result = await this.httpClient.get(
-      url,
-      { headers: this.getHeaders() }
-    ).toPromise();
-    this.handleApiaryResponse(result);
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.get<ApiaryModel | ServerError>(url, { headers: this.getHeaders() }).toPromise();
+      this.isLoading.next(false);
+      this.handleApiaryResponse(result);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
   }
 
   private getHeaders(): HttpHeaders {
@@ -64,16 +93,20 @@ export class UserDataService {
     });
   }
 
-  private handleApiaryResponse(response: any): void {
-    if (response.error) {
+  private isError(elem: any): elem is ServerError {
+    return (<ServerError>elem).error !== undefined;
+  }
+
+  private handleApiaryResponse(response: ApiaryModel | ServerError): void {
+    if (this.isError(response)) {
       this.isDatabaseError.next(true);
     } else {
       this.apiary.next(response);
     }
   }
 
-  private handleApiariesResponse(response: any): void {
-    if (response.error) {
+  private handleApiariesResponse(response: ApiariesModel[] | ServerError): void {
+    if (this.isError(response)) {
       this.isDatabaseError.next(true);
     } else {
       this.apiaries.next(response);

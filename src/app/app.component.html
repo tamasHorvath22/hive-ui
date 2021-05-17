@@ -1,3 +1,4 @@
 <button mat-raised-button color="primary" (click)="onToggle()">{{ 'test.toggleLanguage' | translate }}</button>
 <button mat-raised-button color="primary" (click)="onLogout()">{{ 'test.logout' | translate }}</button>
 <router-outlet></router-outlet>
+<app-spinner *ngIf="isLoading"></app-spinner>

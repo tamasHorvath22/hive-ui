@@ -19,12 +19,12 @@ export class ApiaryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userDataServce: UserDataService,
-    private router: Router,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.subscribeForApiariesData();
     await this.getApiaryData();
+    this.subscribeForApiariesData();
     this.subscribeForApiaryData();
   }
 
@@ -32,11 +32,10 @@ export class ApiaryComponent implements OnInit {
     if (!this.siteName.value) {
       return;
     }
-    const data = {
+    await this.userDataServce.addSite({
       apiaryId: this.route.snapshot.params.id,
       siteName: this.siteName.value
-    };
-    await this.userDataServce.addSite(data);
+    });
   }
 
   public onSelectSite(siteName: string): void {
