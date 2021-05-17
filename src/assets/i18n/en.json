@@ -12,7 +12,14 @@
     "yourApiary": "Your apiaries"
   },
   "apiary": {
-    "addSite": "Add site"
+    "addSite": "Add site",
+    "sites": "Sites",
+    "nextHiveNumber": "Next hive number",
+    "addHive": "Add hive",
+    "mustSelectSite": "You must select a site!"
+  },
+  "hive": {
+    "saveSite": "Save site"
   },
   "errorDialog": {
     "databaseError": "Database error! Please try again!",

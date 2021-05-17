@@ -12,7 +12,14 @@
     "yourApiary": "Méhészeteid"
   },
   "apiary": {
-    "addSite": "Telephely hozzáadása"
+    "addSite": "Telephely hozzáadása",
+    "sites": "Telephelyek",
+    "nextHiveNumber": "Következő kaptárszám",
+    "addHive": "Kaptár hozzáadása",
+    "mustSelectSite": "Válassz egy telephelyet!"
+  },
+  "hive": {
+    "saveSite": "Telephely mentése"
   },
   "errorDialog": {
     "databaseError": "Adatbázis hiba. Próbáld újra!",

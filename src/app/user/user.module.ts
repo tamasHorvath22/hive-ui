@@ -7,11 +7,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiaryComponent } from './apiary/apiary.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SiteComponent } from './site/site.component';
+import { HiveComponent } from './hive/hive.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    ApiaryComponent
+    ApiaryComponent,
+    SiteComponent,
+    HiveComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +24,8 @@ import { ApiaryComponent } from './apiary/apiary.component';
     TranslateModule,
     MatCardModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ]
 })
 export class UserModule { }

@@ -1,0 +1,8 @@
+<div *ngFor="let hive of hives">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="onSelectHive(hive._id)">
+    {{ hive.number }}
+  </button>
+</div>

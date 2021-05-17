@@ -56,6 +56,23 @@ export class UserDataService {
     }
   }
 
+  public async createHive(data: { apiaryId: string, siteId: string}): Promise<void> {
+    const url = `${environment.serverBaseUrl}/api/create-hive`;
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.post<ApiariesModel[] | ServerError>(
+        url,
+        data,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      this.handleApiariesResponse(result);
+      this.isLoading.next(false);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
+  }
+
   public async getApiariesData(): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/apiary-data`;
     this.isLoading.next(true);

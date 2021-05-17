@@ -1,0 +1,20 @@
+<div>{{ hive?.number }}</div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'apiary.sites' | translate }}</mat-label>
+    <mat-select [formControl]="siteOfHive">
+      <mat-option *ngFor="let site of apiary?.sites" [value]="site._id">
+        {{ site.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div>
+  <button
+    mat-raised-button
+    (click)="onSaveHiveSite()"
+    color="primary">
+    {{ 'hive.saveSite' | translate }}
+  </button>
+</div>

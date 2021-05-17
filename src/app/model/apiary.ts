@@ -1,8 +1,10 @@
+import { SiteModel } from './site';
+import { HiveModel } from "./hive";
 export interface ApiaryModel {
   collaborators: string[];
-  // TODO create Hive interface
-  hives: object[];
+  hives: HiveModel[];
   name: string;
   owner: string;
-  sites: string[]
+  sites: SiteModel[],
+  _id: string
 }
