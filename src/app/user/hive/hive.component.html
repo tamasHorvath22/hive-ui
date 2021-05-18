@@ -18,3 +18,14 @@
     {{ 'hive.saveSite' | translate }}
   </button>
 </div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'hive.honeyQuality' | translate }}</mat-label>
+    <mat-select [formControl]="honeyQualitySelected" (selectionChange)="onHoneyQualityChange($event)">
+      <mat-option *ngFor="let honeyQ of honeyQuality" [value]="honeyQ">
+        {{ 'hive.honeyQualities.' + honeyQ | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

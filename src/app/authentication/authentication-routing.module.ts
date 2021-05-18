@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'logged-out',
     component: LogoutPageComponent
+  },
+  {
+    path: 'register/:token',
+    component: RegisterComponent
   }
 ];
 

@@ -1,5 +1,40 @@
 <div>{{ apiary?.name }}</div>
 
+<div *ngIf="isOwner()">
+  <input type="text"
+    aria-label="Number"
+    matInput
+    [formControl]="invitedEmail"
+    [matAutocomplete]="invitedEmailAuto">
+  <mat-autocomplete #invitedEmailAuto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="onSelectEmail($event)">
+      {{ option }}
+    </mat-option>
+  </mat-autocomplete>
+  <div *ngIf="invitedEmail.value && !(filteredOptions | async)?.length">{{ 'apiary.noMatch' | translate }}</div>
+  <div>
+    <button
+      mat-raised-button
+      (click)="onInvite()"
+      [disabled]="!invitedEmail.value"
+      color="primary">
+      {{ 'apiary.invite' | translate }}
+    </button>
+  </div>
+
+  <div>
+    <button
+      mat-raised-button
+      (click)="onCreateInviteLink()"
+      color="primary">
+      {{ 'apiary.createInviteLink' | translate }}
+    </button>
+  </div>
+  <div *ngIf="inviteLink">{{ inviteLink }}</div>
+</div>
+
+
+<div>{{ 'apiary.sites' | translate }}</div>
 <div *ngFor="let site of apiary?.sites">
   <button
     mat-raised-button
@@ -9,15 +44,16 @@
   </button>
 </div>
 
-
-<input type="text" [formControl]="siteName">
-<div>
-  <button
-    mat-raised-button
-    (click)="onAddSite()"
-    color="primary">
-    {{ 'apiary.addSite' | translate }}
-  </button>
+<div *ngIf="isOwner()">
+  <input type="text" [formControl]="siteName">
+  <div>
+    <button
+      mat-raised-button
+      (click)="onAddSite()"
+      color="primary">
+      {{ 'apiary.addSite' | translate }}
+    </button>
+  </div>
 </div>
 
 <div>

@@ -19,6 +19,7 @@ export class UserDataService {
   public apiaries = new BehaviorSubject<ApiariesModel[]>([]);
   public isDatabaseError = new BehaviorSubject<boolean>(false);
   public isLoading = new BehaviorSubject<boolean>(false);
+  public invitationLink = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient) {}
 
@@ -39,7 +40,7 @@ export class UserDataService {
     }
   }
 
-  public async createApiary(data: { name: string}): Promise<void> {
+  public async createApiary(data: { name: string }): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/create-apiary`;
     this.isLoading.next(true);
     try {
@@ -56,16 +57,59 @@ export class UserDataService {
     }
   }
 
-  public async createHive(data: { apiaryId: string, siteId: string}): Promise<void> {
+  public async createHive(data: { apiaryId: string, siteId: string }): Promise<void> {
     const url = `${environment.serverBaseUrl}/api/create-hive`;
     this.isLoading.next(true);
     try {
-      const result = await this.httpClient.post<ApiariesModel[] | ServerError>(
+      const result = await this.httpClient.post<ApiaryModel | ServerError>(
         url,
         data,
         { headers: this.getHeaders() }
       ).toPromise();
-      this.handleApiariesResponse(result);
+      this.handleApiaryResponse(result);
+      this.isLoading.next(false);
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+    }
+  }
+
+  public async createInviteLink(data: { apiaryId: string }): Promise<string | null> {
+    const url = `${environment.serverBaseUrl}/api/create-invite-link`;
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.post<{ token: string } | ServerError>(
+        url,
+        data,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      if (!this.isError(result)) {
+        this.isLoading.next(false);
+        return result.token;
+        // this.invitationLink.next(result);
+      } else {
+        this.isDatabaseError.next(true);
+        this.isLoading.next(false);
+        return null;
+      }
+    } catch (e) {
+      // TODO error handling
+      this.isLoading.next(false);
+      this.isDatabaseError.next(true);
+      return null;
+    }
+  }
+
+  public async updateHive(data: { apiaryId: string, hiveId: string, siteId: string }): Promise<void> {
+    const url = `${environment.serverBaseUrl}/api/update-hive`;
+    this.isLoading.next(true);
+    try {
+      const result = await this.httpClient.post<ApiaryModel | ServerError>(
+        url,
+        data,
+        { headers: this.getHeaders() }
+      ).toPromise();
+      this.handleApiaryResponse(result);
       this.isLoading.next(false);
     } catch (e) {
       // TODO error handling

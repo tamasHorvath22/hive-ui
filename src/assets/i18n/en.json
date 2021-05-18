@@ -6,6 +6,10 @@
     "login": "Login",
     "logout": "Logout"
   },
+  "auth": {
+    "goToLoginPage": "Go to login page",
+    "register": "Register with Google"
+  },
   "profile": {
     "welcome": "Welcome",
     "addApiary": "Add apiary",
@@ -16,10 +20,21 @@
     "sites": "Sites",
     "nextHiveNumber": "Next hive number",
     "addHive": "Add hive",
-    "mustSelectSite": "You must select a site!"
+    "mustSelectSite": "You must select a site!",
+    "invite": "Invite",
+    "noMatch": "No match",
+    "createInviteLink": "Create invite link"
   },
   "hive": {
-    "saveSite": "Save site"
+    "saveSite": "Save site",
+    "honeyQuality": "Honey quality",
+    "honeyQualities": {
+      "": "",
+      "GOOD": "good",
+      "MEDIUM": "medium",
+      "LITTLE": "little",
+      "NO": "no"
+    }
   },
   "errorDialog": {
     "databaseError": "Database error! Please try again!",

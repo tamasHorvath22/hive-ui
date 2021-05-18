@@ -31,6 +31,7 @@ export class SiteComponent implements OnInit {
 
   private findHivesForSite(siteId: string): void {
     this.hives = this.apiary?.hives.filter(hive => hive.site.toString() === siteId);
+    this.hives?.sort((a: HiveModel, b: HiveModel) => a.number - b.number);
   }
 
   private async getApiaryData(): Promise<void> {

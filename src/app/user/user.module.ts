@@ -10,6 +10,7 @@ import { ApiaryComponent } from './apiary/apiary.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SiteComponent } from './site/site.component';
 import { HiveComponent } from './hive/hive.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HiveComponent } from './hive/hive.component';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule
   ]
 })
 export class UserModule { }

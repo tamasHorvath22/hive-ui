@@ -6,6 +6,10 @@
     "login": "Bejelentkezés",
     "logout": "Kijelentkezés"
   },
+  "auth": {
+    "goToLoginPage": "Tovább a bejelentkező oldalra",
+    "register": "Regisztrálás Google fiókkal"
+  },
   "profile": {
     "welcome": "Üdv",
     "addApiary": "Méhészet hozzáadása",
@@ -16,10 +20,21 @@
     "sites": "Telephelyek",
     "nextHiveNumber": "Következő kaptárszám",
     "addHive": "Kaptár hozzáadása",
-    "mustSelectSite": "Válassz egy telephelyet!"
+    "mustSelectSite": "Válassz egy telephelyet!",
+    "invite": "Meghívás",
+    "noMatch": "Nincs találat",
+    "createInviteLink": "Meghívó link készítése"
   },
   "hive": {
-    "saveSite": "Telephely mentése"
+    "saveSite": "Telephely mentése",
+    "honeyQuality": "Méz mindőség",
+    "honeyQualities": {
+      "": "",
+      "GOOD": "jó",
+      "MEDIUM": "közepes",
+      "LITTLE": "kevés",
+      "NO": "nincs"
+    }
   },
   "errorDialog": {
     "databaseError": "Adatbázis hiba. Próbáld újra!",
